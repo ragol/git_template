@@ -7,7 +7,6 @@ main()
 	then
 		echo "This script is supposed to be run at the root of a git repository" >&2
 	fi
-	rsync --archive --verbose --compress --cvs-exclude "$templateDir/hooks/" .git/hooks --delete
-	cp -f "$templateDir/configure.sh" .git
+	rm -rf .git/tests .git/docs .git/mkdocs.yml .git/README.md .git/LICENSE .git/CONTRIBUTING.md .git/update.sh
 }
 main

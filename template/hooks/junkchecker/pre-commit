@@ -1,0 +1,33 @@
+#!/bin/bash
+. "$GIT_DIR/hooks/git_config_wrapper.sh"
+get_hook_config junkchecker phrasesfile junkchecker_phrases_file required
+if [ -f "$junkchecker_phrases_file" ]
+then
+	if git-rev-parse --verify HEAD >/dev/null 2>&1; then
+		against=HEAD
+	else
+		against=4b825dc642cb6eb9a060e54bf8d69288fbee4904
+	fi
+
+	for FILE in $(git diff-index --cached --name-status $against -- | cut --characters=3-); do
+		if [ -f "$FILE" ]
+		then
+			for line in $(cat "$junkchecker_phrases_file")
+			do
+
+				git diff --cached --diff-filter=ACMR "$FILE" | grep -E '^\+' | grep --quiet "$line"
+				if [ $? -eq 0 ]
+				then
+					cat <<- EOT >&2
+					Junk checker detected: $FILE contains '$line'.
+					Use the --no-verify option to bypass this error message.
+					EOT
+					exit 1
+				fi
+			done
+		fi
+	done
+else
+	echo "Could not find file $junkchecker_phrases_file . Please check your configuration."
+	exit 2
+fi

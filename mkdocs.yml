@@ -1,0 +1,12 @@
+site_name: Git Template
+pages:
+  - [index.md, Home]
+  - [usage.md, Usage]
+  - [hooks/junk-checker.md, 'Hooks', 'Junk checker']
+  - [hooks/syntax-checker.md, 'Hooks', 'Syntax checker']
+  - [hooks/work-in-progress.md, 'Hooks', 'Work In Progress']
+  - [hooks/php/composer.md, 'Hooks', 'PHP : Composer']
+  - [hooks/php/ctags.md, 'Hooks', 'PHP : Ctags']
+  - [hooks/php/sismo.md, 'Hooks', 'PHP : Sismo']
+  - [hooks/php/doctrine.md, 'Hooks', 'PHP : Doctrine']
+  - [upgrade/2-to-3.md, 'Upgrading', '2.x.x to 3.x.x']
